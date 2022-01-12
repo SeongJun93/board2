@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserDAO">
+	<insert id="UserInsert">
+		INSERT INTO
+			"userInfo"(
+				ID,
+				PASSWORD,
+				NAME,
+				PNUM,
+				EMAIL,
+				REG_DATE,
+				REG_ID,
+				UPDT_DATE
+				)
+		VALUES(
+			#{id},
+			#{password},
+			#{name},
+			#{pnum},
+			#{email},
+			current_timestamp,
+			#{id},
+			current_timestamp
+			)
+	</insert>
+	 
+  <!-- 생성된 메일 인증키 업데이트 -->
+  <update id="createAuthkey">
+    update "userInfo" set authkey = #{param2} where email = #{param1}
+  </update>
+  
+  
+  <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
+  <update id="updateAuthstatus">
+      update "userInfo" set authstatus = 1 where email = #{param1}
+  </update>
+  
+ 
+	<select id="UserId_Login_Chk" parameterType="user" resultType="user">
+	SELECT 
+		ID,
+		PASSWORD
+	FROM
+		"userInfo"
+	WHERE
+		ID=#{id}
+		 <if test="password != null">
+		AND password=#{password}
+		</if>
+	</select>
+</mapper> 
