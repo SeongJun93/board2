@@ -9,8 +9,15 @@ public class BoardVO {
 	private String Board_dt;
 	private String Board_updt;
 	private String Board_title;
+	private String id;
 	private int rnum;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getRnum() {
 		return rnum;
 	}

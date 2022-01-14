@@ -23,7 +23,5 @@ public class SearchVO extends PagingVO{
 	}
 	public void setBoard_seq(String board_seq) {
 		this.board_seq = board_seq;
-	}
-	
-	
+	}	
 }

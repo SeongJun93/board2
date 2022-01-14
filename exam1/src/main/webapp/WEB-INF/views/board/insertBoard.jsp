@@ -68,7 +68,7 @@ function fn_validate(){
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input disabled="disabled" type="text" name="id" value="${userinfo.id}"></td>
+				<td><input disabled="disabled" type="text" id="reg_id" name="reg_id" value="${user.id}"></td>
 			</tr>
 			<tr>
 				<td>패스워드</td>

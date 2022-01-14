@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.company.DAO.UserDAO;
+import com.company.Domain.BoardVO;
 import com.company.Domain.UserVO;
 
 @Service("UserService")
@@ -21,6 +22,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO UserId_Login_Chk(UserVO vo) {
 		return userDAO.UserId_Login_Chk(vo);
+	}
+	@Override
+	public UserVO getUser(BoardVO vo) {
+		return userDAO.getUser(vo);
 	}
 }
 

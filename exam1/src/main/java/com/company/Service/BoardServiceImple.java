@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.company.DAO.BoardDAO;
 import com.company.Domain.BoardVO;
+import com.company.Domain.UserVO;
 
 @Service("boardService")
 public class BoardServiceImple implements BoardService {

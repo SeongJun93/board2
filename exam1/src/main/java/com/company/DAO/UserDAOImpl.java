@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.company.Domain.BoardVO;
 import com.company.Domain.UserVO;
 
 @Repository("UserDAO")
@@ -23,5 +24,9 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public UserVO UserId_Login_Chk(UserVO vo) {
 		return mybatis.selectOne("UserDAO.UserId_Login_Chk",vo);
+	}
+	@Override
+	public UserVO getUser(BoardVO vo) {
+		return mybatis.selectOne("UserDAO.getUser",vo);
 	}
 }

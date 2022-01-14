@@ -11,7 +11,42 @@ public class UserVO {
 	private String updt_date;
 	private String authkey; // 인증키
 	private int authstatus; // 인증상태
+	private String postcode;
+	private String roadAddress;
+	private String jibunAddress;
+	private String detailAddress;
+	private String extraAddress;
 	
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public String getRoadAddress() {
+		return roadAddress;
+	}
+	public void setRoadAddress(String roadAddress) {
+		this.roadAddress = roadAddress;
+	}
+	public String getJibunAddress() {
+		return jibunAddress;
+	}
+	public void setJibunAddress(String jibunAddress) {
+		this.jibunAddress = jibunAddress;
+	}
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
+	}
+	public String getExtraAddress() {
+		return extraAddress;
+	}
+	public void setExtraAddress(String extraAddress) {
+		this.extraAddress = extraAddress;
+	}
 	public String getAuthkey() {
 		return authkey;
 	}

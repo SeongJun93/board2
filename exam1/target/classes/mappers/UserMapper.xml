@@ -12,7 +12,12 @@
 				EMAIL,
 				REG_DATE,
 				REG_ID,
-				UPDT_DATE
+				UPDT_DATE,
+				POSTCODE,
+				"roadAddress",
+				"jibunAddress",
+				"detailAddress",
+				"extraAddress"
 				)
 		VALUES(
 			#{id},
@@ -22,7 +27,12 @@
 			#{email},
 			current_timestamp,
 			#{id},
-			current_timestamp
+			current_timestamp,
+			#{postcode},
+			#{roadAddress},
+			#{jibunAddress},
+			#{detailAddress},
+			#{extraAddress}
 			)
 	</insert>
 	 
@@ -49,5 +59,13 @@
 		 <if test="password != null">
 		AND password=#{password}
 		</if>
+	</select>
+	<select id="getUser" parameterType="user" resultType="user">
+		SELECT 
+			*
+		FROM 
+			"userInfo"
+		WHERE 
+			ID = #{id}
 	</select>
 </mapper> 

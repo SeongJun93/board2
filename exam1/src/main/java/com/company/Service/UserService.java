@@ -1,5 +1,6 @@
 package com.company.Service;
 
+import com.company.Domain.BoardVO;
 import com.company.Domain.UserVO;
 
 public interface UserService  {
@@ -7,4 +8,6 @@ public interface UserService  {
 	
 	//로그인 회원정보 조회
 	public UserVO UserId_Login_Chk(UserVO vo);
+
+	UserVO getUser(BoardVO vo);
 }

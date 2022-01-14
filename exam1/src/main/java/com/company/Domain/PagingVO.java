@@ -1,5 +1,4 @@
 package com.company.Domain;
-
 public class PagingVO {
 	private int listSize = 10; // 초기값으로 목록개수를 10으로 셋팅 한 페이지당 보여질 리스트의 개수
 	private int rangeSize = 10; // 초기값으로 페이지범위를 5로 셋팅 한 페이지 범위에 보여질 페이지의 개수
@@ -12,7 +11,6 @@ public class PagingVO {
 	private int endPage; // 각 페이지 범위 끝 번호
 	private boolean prev; // 이전 페이지
 	private boolean next; // 다음 페이지
-	
 	
 	public int getListSize() {
 		return listSize;
@@ -124,7 +122,7 @@ public class PagingVO {
 	}
 
 
-	// 첫번째 인자 page 는 현재 페이지 정보, 두번째 인자 range 는 현재 페이지 범위 정보, 세번째 인자 listCnt는 게시물의 총 개수
+	// 첫번째 인자 nowPage 는 현재 페이지 정보, 두번째 인자 nowRange 는 현재 페이지 범위 정보, 세번째 인자 listCnt는 게시물의 총 개수
 	// 페이징 할시 첫번째로 세팅해야할 것 전체게시물 수 현재 보여줄 페이지 번호,페이지 범위
 	public void pageInfo(int nowPage, int nowRange, int listCnt) {
 
@@ -140,15 +138,18 @@ public class PagingVO {
 		
 		// 시작 페이지
 		// 각 페이지 범위 시작 번호 = (각 페이지 범위 시작 번호  - 1) * 초기값 페이징 갯수+1
+		// 1/11/21/31/41 ......
 		this.startPage = (nowRange - 1) * rangeSize + 1;
 
 		// 끝 페이지
 		// 각 페이지 범위 끝 번호 = 각 페이지 범위 시작 번호 * 초기값 페이징 갯수
+		// 10/20/30/40 ......
 		this.endPage = nowRange * rangeSize;
 
 		// 게시판 시작번호
-		// 게시판 시작 번호 = (현재목록의 페이지 번호 - 1) * 개시글 총 갯수
-		this.startListNum = (nowPage - 1) * listSize;
+		// 게시판 시작 번호 = (현재목록의 페이지 번호 - 1) * 목록갯수
+		// 게시판은 0번 부터 시작 뒤에서
+		this.startListNum = (nowPage - 2) * listSize;
 
 		// 이전 버튼 상태
 		// 삼항연산자 

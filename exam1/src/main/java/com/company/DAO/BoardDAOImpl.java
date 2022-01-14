@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.company.Domain.BoardVO;
+import com.company.Domain.UserVO;
 
 @Repository("BoardDAO")
 public class BoardDAOImpl implements BoardDAO{

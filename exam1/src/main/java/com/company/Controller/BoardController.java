@@ -40,7 +40,9 @@ public class BoardController {
 	
 	@RequestMapping(value="/insertBoardPage",method=RequestMethod.POST)
 	public String insertBoardPage(BoardVO vo,UserVO vo2,Model model,HttpSession session) {
-		vo2.setId(String.valueOf(session.getAttribute("id")));
+		vo.setId(String.valueOf(session.getAttribute("id")));
+		UserVO result = userService.getUser(vo);
+		model.addAttribute("user",result);
 		System.out.println("게시글 작성페이지");
 		return "board/insertBoard";
 	}
@@ -48,14 +50,13 @@ public class BoardController {
 	@RequestMapping(value="/insertBoard", consumes = "application/json; charset=UTF-8", produces = MediaType.APPLICATION_JSON_VALUE+"; charset=utf-8")
 	public Map<String,Object >insertBoard(@RequestBody BoardVO vo,HttpSession session ,Model model) {
 		Map<String,Object> resultMap=new HashMap<>();
-		vo.setReg_id(String.valueOf(session.getAttribute("reg_id")));
 		boardService.insertBoard(vo);
 		resultMap.put("resultCode","0000");
 		System.out.println("게시글 작성완료");
 		return resultMap;
 	}
 	@RequestMapping(value="/getBoard", method = RequestMethod.POST)
-	public String getBoard(BoardVO vo,Model model) {
+	public String getBoard(BoardVO vo,Model model,UserVO vo2) {
 		model.addAttribute("getBoard", boardService.getBoard(vo));
 		System.out.println("게시판 상세");
 		return "board/getBoard";

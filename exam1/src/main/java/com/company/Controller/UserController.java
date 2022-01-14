@@ -46,11 +46,9 @@ public class UserController {
    @RequestMapping(value="/insertUser",method=RequestMethod.POST)
    public String UserInsert(UserVO vo) throws Exception {
 	   System.out.println("회원가입 완료");
-	 try {
+	 
 	 	 userService.UserInsert(vo);				
-	 }catch(Exception e){
-		 throw new RuntimeException();
-	 }
+	 
 	 return "user/login";
    }
    //로그인액션
