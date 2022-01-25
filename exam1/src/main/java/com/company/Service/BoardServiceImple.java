@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.company.DAO.BoardDAO;
 import com.company.Domain.BoardVO;
+import com.company.Domain.SearchVO;
 import com.company.Domain.UserVO;
+
 
 @Service("boardService")
 public class BoardServiceImple implements BoardService {
@@ -19,12 +21,24 @@ public class BoardServiceImple implements BoardService {
 		boardDAO.insertBoard(vo);
 	}
 	@Override
-	public List<BoardVO> getBoardList() {
-		return boardDAO.getBoardList();
+	public List<BoardVO> getBoardList(SearchVO search) throws Exception {
+		return boardDAO.getBoardList(search);
+	}
+	@Override
+	public int getBoardListCnt(SearchVO search) throws Exception {
+		return boardDAO.getBoardListCnt(search);
 	}
 	@Override
 	public BoardVO getBoard(BoardVO vo) {
 		return boardDAO.getBoard(vo);
+	}
+	@Override
+	public void deleteBoard(BoardVO vo) {
+		boardDAO.deleteBoard(vo);
+	}
+	@Override
+	public void updateBoard(BoardVO vo) {
+		boardDAO.updateBoard(vo);
 	}
 }
 

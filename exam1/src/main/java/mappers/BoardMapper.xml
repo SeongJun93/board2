@@ -21,14 +21,46 @@
 			,#{board_title}
 			)
 	</insert>
-	<select id="getBoardList" resultType="board">
+	<select id="getBoardList" resultType="board" parameterType="board">
 		SELECT BOARD_SEQ
 			   ,BOARD_TITLE
 			   ,reg_id
 			   ,TO_CHAR(BOARD_DT, 'yyyy-mm-dd hh:mi:ss') AS BOARD_DT
 			   ,ROW_NUMBER() OVER (ORDER BY BOARD_DT ASC) AS RNUM
 		  FROM EXAMBOARD
-		  ORDER BY RNUM DESC
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='title' and keyword != null and keyword != '' ">
+				AND BOARD_TITLE like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='content' and keyword != null and keyword != '' ">
+				AND BOARD_CONTENT like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='reg_id' and keyword != null and keyword != '' ">
+				AND REG_ID like CONCAT('%', #{keyword}, '%')
+			</if>	
+		</trim>
+		ORDER BY RNUM desc
+		OFFSET #{startListNum}
+		LIMIT #{listSize}
+	</select>
+	<select id="getBoardListCnt" resultType="int">
+		SELECT
+			count(*) as listCnt
+		FROM
+			EXAMBOARD
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+			<if test="searchType=='title'">
+				AND BOARD_TITLE like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='content'">
+				AND BOARD_CONTENT like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='reg_id'">
+				AND REG_ID like CONCAT('%', #{keyword}, '%')
+			</if>
+    		</if>
+		</trim>
 	</select>
 	<select id="getBoard" parameterType="board" resultType="board">
 		SELECT
@@ -42,4 +74,20 @@
 		WHERE 
 			BOARD_SEQ=#{board_seq}
 	</select>
+	<delete id="deleteBoard" parameterType="board">
+		DELETE
+		FROM
+			EXAMBOARD
+		WHERE 
+			BOARD_SEQ=#{board_seq}
+	</delete>
+	<update id="updateBoard" parameterType="board">
+		UPDATE
+			EXAMBOARD
+		SET
+			BOARD_TITLE=#{board_title}
+			,BOARD_CONTENT=#{board_content}
+		WHERE
+			BOARD_SEQ=#{board_seq}
+	</update>
 </mapper> 

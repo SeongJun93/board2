@@ -8,5 +8,8 @@
 	<typeAliases>
 		<typeAlias type="com.company.Domain.UserVO" alias="user" />
 		<typeAlias type="com.company.Domain.BoardVO" alias="board" />
+		<typeAlias type="com.company.Domain.AuthorVO" alias="author" />
+		<typeAlias type="com.company.Domain.BookVO" alias="book" />
+		<typeAlias type="com.company.Domain.CateVO" alias="cate" />
 	</typeAliases>
 </configuration>

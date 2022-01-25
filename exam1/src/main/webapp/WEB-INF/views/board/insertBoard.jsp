@@ -9,7 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
-<meta charset="EUC-KR">
 <title>Insert Board</title>
 <script type="text/javascript">
 function go_board() {
@@ -32,7 +31,8 @@ function fn_validate(){
 		return false;
 	}
 	return true;
-}function fn_InsertMember() {
+}
+function fn_InsertMember() {
 	var param = {
 			board_title:$('[name=board_title]').val(),
 			reg_id:$('[name=reg_id]').val(),

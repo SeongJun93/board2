@@ -1,7 +1,7 @@
 package com.company.Domain;
 public class PagingVO {
 	private int listSize = 10; // 초기값으로 목록개수를 10으로 셋팅 한 페이지당 보여질 리스트의 개수
-	private int rangeSize = 10; // 초기값으로 페이지범위를 5로 셋팅 한 페이지 범위에 보여질 페이지의 개수
+	private int rangeSize = 5; // 초기값으로 페이지범위를 5로 셋팅 한 페이지 범위에 보여질 페이지의 개수
 	private int nowPage = 1; // 현재목록의 페이지 번호
 	private int nowRange = 1; // 각 페이지 범위 시작 번호
 	private int listCnt; // 전체 개시물의 개수
@@ -149,7 +149,7 @@ public class PagingVO {
 		// 게시판 시작번호
 		// 게시판 시작 번호 = (현재목록의 페이지 번호 - 1) * 목록갯수
 		// 게시판은 0번 부터 시작 뒤에서
-		this.startListNum = (nowPage - 2) * listSize;
+		this.startListNum = (nowPage - 1) * listSize;
 
 		// 이전 버튼 상태
 		// 삼항연산자 

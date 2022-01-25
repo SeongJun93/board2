@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BookDAO">
+	<insert id="insertBook" parameterType="book">
+		INSERT INTO VAM_BOOK(
+	       BOOKID
+	       ,BOOKNAME
+	       ,AUTHORID
+	       ,PUBLEYEAR
+	       ,PUBLISHER
+	       ,CATECODE
+	       ,BOOKPRICE
+	       ,BOOKSTOCK
+	       ,bookdiscount
+	       ,bookintro
+	       ,BOOKCONTENTS
+	       ,REGDATE
+	       ,UPDTDATE
+	       )VALUES (
+			'seed'||TO_CHAR(NOW(),'yyyymmdd')||LPAD(NEXTVAL('book_num')::TEXT,8,'0')
+			,#{bookName}
+			,#{authorId}
+			,#{publeYear}
+			,#{publisher}
+			,#{cateCode}
+			,#{bookPrice}
+			,#{bookStock}
+			,#{bookDiscount}
+			,#{bookIntro}
+			,#{bookContents}
+			,transaction_timestamp()
+			,transaction_timestamp()
+		)
+	</insert>
+	<select id="getBookListCnt" resultType="int">
+		SELECT
+			count(*) as listCnt
+		FROM
+			VAM_BOOK
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='authorName'">
+					AND AUTHORNAME like CONCAT('%', #{keyword}, '%')
+				</if>
+    		</if>
+		</trim>
+	</select>
+</mapper>

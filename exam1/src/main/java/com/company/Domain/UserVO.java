@@ -16,7 +16,14 @@ public class UserVO {
 	private String jibunAddress;
 	private String detailAddress;
 	private String extraAddress;
+	private String adminck;
 	
+	public String getAdminck() {
+		return adminck;
+	}
+	public void setAdminck(String adminck) {
+		this.adminck = adminck;
+	}
 	public String getPostcode() {
 		return postcode;
 	}

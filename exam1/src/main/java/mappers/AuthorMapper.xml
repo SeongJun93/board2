@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AuthorDAO">
+	<insert id="insertAuthor" parameterType="author">
+		INSERT INTO VAM_AUTHOR(
+		AUTHORID,
+		AUTHORNAME,
+		NATIONID,
+		AUTHORINTRO,
+		REGDATE,
+		UPDTDATE
+		)VALUES(
+		'author'||TO_CHAR(NOW(),'yyyymmdd')||LPAD(NEXTVAL('author_num')::TEXT,8,'0'),
+		#{authorName},
+		#{nationId},
+		#{authorIntro},
+		current_timestamp,
+		current_timestamp
+		)
+	</insert>
+	<select id="authorDetail" parameterType="author" resultType="author">
+		SELECT
+			AUTHORNAME
+			,NATIONID
+			,AUTHORINTRO
+			,REGDATE
+		FROM 
+			vam_author
+		WHERE 
+		    AUTHORID = #{authorId}		
+	</select>
+	<select id="getAuthorList" resultType="author" parameterType="author">
+		SELECT AUTHORID
+			   ,AUTHORNAME
+			   ,NATIONID
+			   ,AUTHORINTRO
+			   ,TO_CHAR(REGDATE, 'yyyy-mm-dd hh:mi:ss') AS REGDATE
+			   ,ROW_NUMBER() OVER (ORDER BY REGDATE ASC) AS RNUM
+		  FROM vam_author
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='authorName' and keyword != null and keyword != '' ">
+				AND authorName like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		ORDER BY RNUM desc
+		OFFSET #{startListNum}
+		LIMIT #{listSize}
+	</select>
+	<select id="getAuthorListCnt" resultType="int">
+		SELECT
+			count(*) as listCnt
+		FROM
+			vam_author
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='title'">
+					AND authorName like CONCAT('%', #{keyword}, '%')
+				</if>
+    		</if>
+		</trim>
+	</select>
+	<select id="getCateList" resultType="cate" parameterType="cate">
+		SELECT
+			TIER
+			,CATENAME
+			,CATECODE
+			,CATEPARENT 
+		FROM vam_bcate order by catecode
+	</select>
+</mapper>

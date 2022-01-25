@@ -12,13 +12,19 @@
 function go_board() {
 	$("#form").attr("action","/exam/board").submit();
 }
+function go_delete_board(){
+	$("#form").attr("action","/exam/deleteBoard").submit();
+}
+function go_update_board(){
+	$("#form").attr("action","/exam/updateBoardView").submit();
+}
 </script>
 <title>get board</title>
 </head>
 <body>
 	<h1>게시판 상세조회</h1>
 	<form id="form" method="POST">
-				<input type="hidden" name="board_seq" value="${examboard.board_seq }"/>
+				<input type="hidden" name="board_seq" value="${getBoard.board_seq }"/>
 		<table>
 			<tbody>
 				<tr>
@@ -38,10 +44,21 @@ function go_board() {
 					<td>${getBoard.board_content}</td>
 				</tr>
 				<tr>
-					<td><button type="submit" onclick="go_board();">뒤로가기</button></td>
+				
+					<td><button type="submit" onclick="go_board();">back</button></td>
+				<c:if test="${sessionScope.id == getBoard.reg_id }">
+					<td><button type="submit" onclick="go_delete_board();">delete</button></td>
+					<td><button type="submit" onclick="go_update_board();">updt</button></td>
+				</c:if>
 				</tr>
 			</tbody>
 		</table>
+	<%-- 	<input type="hidden" name="nowPage" value="${search.nowPage }"/>
+		<input type="hidden" name="nowRange" value="${search.nowRange }"/>
+		<input type="hidden" name="rangeSize" value="${search.rangeSize }"/>
+		<input type="hidden" name="listSize" value="${search.listSize }"/>
+		<input type="hidden" name="searchType" value="${search.searchType}"/>
+		<input type="hidden" name="keyword" value="${search.keyword}"/> --%>
 	</form>
 </body>
 </html>
