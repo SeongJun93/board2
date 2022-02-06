@@ -42,8 +42,8 @@ public class AuthorServiceImpl implements AuthorService{
 		authorDAO.deleteAuthor(author);
 	}
 	@Override
-	public List<CateVO> getCateList(CateVO cate) {
-		return authorDAO.getCateList(cate);
+	public List<CateVO> getCateList() {
+		return authorDAO.getCateList();
 		
 	}
 }

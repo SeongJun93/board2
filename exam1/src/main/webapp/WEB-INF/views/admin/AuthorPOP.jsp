@@ -20,7 +20,9 @@ $( document ).ready(function() {
 		let authorName= $(this).data("name");
 		$(opener.document).find("#authorId_input").val(authorId);
 		$(opener.document).find("#authorName_input").val(authorName);
-		window.close();
+		$(opener.document).find("#authorName_warn").html('작가가 입력되었습니다.');
+		$(opener.document).find("#authorName_warn").css('color','green');
+		//window.close();
 	});	
 })
 	function fn_prev(nowPage, nowRange, rangeSize) {
@@ -99,7 +101,7 @@ $( document ).ready(function() {
 			<c:if test="${pagingnation.next}">
 
 				<li><a href="javascript:fn_next('${pagingnation.nowRange}', '${pagingnation.nowRange}', '${pagingnation.rangeSize}');" style="
-	 	  		color:black;text-decoration:none">다음></a></li>
+	 	  		color:black;text-decoration:none">다음</a></li>
 			</c:if>
 		</ul>
 	</div>

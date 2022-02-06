@@ -43,13 +43,13 @@ function fn_memberManage() {
 		<button type="submit" onclick="go_board();" class="admin_link">back</button>
 		<ul style="list-style:none;">
 			<li>
-				<a href="javascript:fn_insertGoods();" class="admin_link">insert goods</a>
+				<a href="javascript:fn_insertGoods();" class="admin_link">goods insert</a>
 			</li>
 			<li>
 				<a href="javascript:fn_goodsManage();" class="admin_link">goods manage</a>
 			</li>
 			<li>
-				<a href="javascript:fn_insertAuthor();" class="admin_link">insert author</a>
+				<a href="javascript:fn_insertAuthor();" class="admin_link"> author insert</a>
 			</li>
 			<li>
 				<a href="javascript:fn_authorManage();" class="admin_link">author manage</a>

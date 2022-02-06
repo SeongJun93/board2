@@ -13,5 +13,5 @@ public interface AuthorDAO {
 	public int getAuthorListCnt(SearchVO search);
 	void updateAuthor (AuthorVO author);
 	void deleteAuthor(AuthorVO author);
-	List<CateVO> getCateList(CateVO cate);
+	List<CateVO> getCateList();
 }

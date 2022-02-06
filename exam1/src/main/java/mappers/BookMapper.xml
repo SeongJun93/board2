@@ -32,6 +32,41 @@
 			,transaction_timestamp()
 		)
 	</insert>
+	<select id="getBookList" parameterType="book" resultType="book">
+		SELECT ROW_NUMBER() OVER(ORDER BY a.REGDATE ASC) AS RNUM
+			   ,BOOKID
+			   ,BOOKNAME
+			   ,b.authorName
+			   ,c.cateName
+			   ,PUBLEYEAR
+			   ,PUBLISHER
+			   ,BOOKPRICE
+			   ,BOOKSTOCK
+			   ,BOOKDISCOUNT
+			   ,BOOKINTRO
+			   ,BOOKCONTENTS
+			   ,TO_CHAR(a.REGDATE, 'yyyy-mm-dd hh:mi:ss') AS REGDATE
+			   ,a.UPDTDATE
+		FROM VAM_BOOK a
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test = "keyword != null and keyword != ''">
+					<if test="searchType=='title' and keyword != null and keyword != '' ">
+						AND BOOKNAME like CONCAT('%',#{keyword},'%')
+					</if>
+					<if test="searchType=='author' and keyword != null and keyword != ''">
+						AND AUTHORNAME like CONCAT('%',#{keyword},'%')
+					</if>
+					<if test="searchType=='publisher' and keyword != null and keyword != ''">
+						AND PUBLISHER like CONCAT('%',#{keyword},'%')
+					</if>
+				</if>
+			</trim>
+				LEFT OUTER JOIN vam_author b ON a.authorid = b.authorid
+				LEFT OUTER JOIN vam_bcate c ON a.catecode = c.catecode 
+				ORDER BY RNUM DESC
+				OFFSET #{startListNum}
+				LIMIT #{listSize}
+	</select>
 	<select id="getBookListCnt" resultType="int">
 		SELECT
 			count(*) as listCnt
@@ -39,8 +74,14 @@
 			VAM_BOOK
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="keyword != null and keyword != '' ">
-				<if test="searchType=='authorName'">
+				<if test="searchType=='title'">
+					AND BOOKNAME like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='author'">
 					AND AUTHORNAME like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='publisher'">
+					AND PUBLISHER like CONCAT('%', #{keyword}, '%')
 				</if>
     		</if>
 		</trim>

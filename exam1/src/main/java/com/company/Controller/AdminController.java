@@ -19,6 +19,7 @@ import com.company.Domain.CateVO;
 import com.company.Domain.SearchVO;
 import com.company.Service.AuthorService;
 import com.company.Service.BookService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -35,12 +36,21 @@ public class AdminController {
 		return "admin/admin";
 	}
 	@RequestMapping(value="/goodsManage",method=RequestMethod.POST)
-	public String goodsManage() {
+	public String goodsManage(SearchVO search, Model model) throws Exception{
+		int listCnt = bookService.getBookListCnt(search);
+		search.pageInfo(search.getNowPage(),search.getNowPage(),listCnt);
+		model.addAttribute("pagingnation",search);
+		model.addAttribute("BookList",bookService.getBookList(search));
+		model.addAttribute("search",search);
 		return "admin/goodsManage";
 	}
 	@RequestMapping(value="/goodsInsert",method=RequestMethod.POST)
-	public String goodsInsert(CateVO cate) {
-		authorService.getCateList(cate);
+	public String goodsInsert(Model model)throws Exception {
+//		authorService.getCateList();
+		ObjectMapper objm = new ObjectMapper();
+		List list = authorService.getCateList();
+		String cateList = objm.writeValueAsString(list);
+		model.addAttribute("cateList", cateList);
 		return "admin/insertGoods";
 	}
 	@RequestMapping(value="/authorInsertPage",method=RequestMethod.POST)
@@ -48,13 +58,14 @@ public class AdminController {
 		return "admin/insertAuthor";
 	}
 	@RequestMapping(value="/authorPOP",method=RequestMethod.POST)
-	public String authorPOP(SearchVO search,Model model)throws Exception {
+	public String authorPOP(SearchVO search,Model model,AuthorVO author)throws Exception {
 		int listCnt = authorService.getAuthorListCnt(search);
 		search.setListSize(5);
 		search.pageInfo(search.getNowPage(), search.getNowRange(), listCnt);
 		model.addAttribute("pagingnation",search);
 		model.addAttribute("AuthorList",authorService.getAuthorList(search));
 		model.addAttribute("search",search);
+		model.addAttribute("author",author);
 		return "admin/AuthorPOP";
 	}
 	@ResponseBody

@@ -59,7 +59,7 @@
     		</if>
 		</trim>
 	</select>
-	<select id="getCateList" resultType="cate" parameterType="cate">
+	<select id="getCateList" resultType="cate">
 		SELECT
 			TIER
 			,CATENAME

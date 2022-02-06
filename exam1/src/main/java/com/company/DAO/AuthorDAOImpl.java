@@ -42,7 +42,7 @@ public class AuthorDAOImpl implements AuthorDAO {
 		mybatis.delete("AuthorDAO.deleteAuthor",author);
 	}
 	@Override
-	public List<CateVO> getCateList(CateVO cate) {
-		return mybatis.selectList("AuthorDAO.getCateList",cate);
+	public List<CateVO> getCateList() {
+		return mybatis.selectList("AuthorDAO.getCateList");
 	}
 }

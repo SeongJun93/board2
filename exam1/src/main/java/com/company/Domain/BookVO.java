@@ -3,7 +3,7 @@ package com.company.Domain;
 public class BookVO {
 	private String BookId;
 	private String BookName;
-	private int authorId;
+	private String authorId;
 	private String PubleYear;
 	private String publisher;
 	private String cateCode;
@@ -14,8 +14,22 @@ public class BookVO {
 	private String BookContents;
 	private String regDate;
 	private String updtDate;
+	private String authorName;
+	private int rnum;
 	
 	
+	public String getAuthorName() {
+		return authorName;
+	}
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public String getBookId() {
 		return BookId;
 	}
@@ -28,10 +42,10 @@ public class BookVO {
 	public void setBookName(String bookName) {
 		BookName = bookName;
 	}
-	public int getAuthorId() {
+	public String getAuthorId() {
 		return authorId;
 	}
-	public void setAuthorId(int authorId) {
+	public void setAuthorId(String authorId) {
 		this.authorId = authorId;
 	}
 	public String getPubleYear() {
